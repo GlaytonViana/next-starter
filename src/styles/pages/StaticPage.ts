@@ -14,19 +14,4 @@ export const Container = styled.div`
     color: ${props => props.theme.colors.primary};
     margin-top: 40px;
   }
-
-  p {
-    margin-top: 24px;
-    font-size: 24px;
-    line-height: 32px;
-  }
-`
-
-export const Avatar = styled.figure`
-  width: 200px;
-
-  img {
-    width: 100%;
-    border-radius: 50%;
-  }
 `

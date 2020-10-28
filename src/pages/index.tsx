@@ -1,10 +1,20 @@
 import React from 'react'
 import Head from 'next/head'
 
-import ineoLogo from '../assets/logo.png'
-import { Container } from '../styles/pages/Home'
+import { Container, Avatar } from '../styles/pages/Home'
+import { GetServerSideProps } from 'next'
+import Link from 'next/link'
 
-const Home: React.FC = () => {
+interface IUser {
+  name: string
+  avatar_url: string
+}
+
+interface IHomeProps {
+  user: IUser
+}
+
+const Home = ({ user }: IHomeProps): JSX.Element => {
   return (
     <Container>
       <Head>
@@ -12,11 +22,25 @@ const Home: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <img src={ineoLogo} alt="" />
-      <h1>Olá NextJS</h1>
-      <p>Testando uma aplicação</p>
+      <p>{user.name}</p>
+      <Avatar>
+        <img src={user.avatar_url} alt="Avatar" />
+      </Avatar>
+
+      <Link href="/page/static">LINK</Link>
     </Container>
   )
 }
 
 export default Home
+
+export const getServerSideProps: GetServerSideProps<IHomeProps> = async () => {
+  const response = await fetch('https://api.github.com/users/GlaytonViana')
+  const user = await response.json()
+
+  return {
+    props: {
+      user
+    }
+  }
+}

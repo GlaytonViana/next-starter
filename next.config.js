@@ -2,8 +2,5 @@ const withImages = require('next-images')
 
 module.exports = withImages({
   esModule: true,
+  target: "experimental-serverless-trace"
 })
-
-module.exports = {
-  target: "serverless"
-}
